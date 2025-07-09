@@ -1,0 +1,41 @@
+Bot de Discord para Aternos
+Este programa es un bot de Discord que se conecta a Aternos (servicio de hosting gratuito de servidores Minecraft) para consultar información del servidor sin modificarlo.
+
+🎯 Función Principal
+Permite a los usuarios de Discord obtener información sobre un servidor de Minecraft alojado en Aternos de forma solo lectura (sin poder modificar nada).
+
+🔧 Componentes Principales
+1. Conexión a Aternos
+Se conecta usando un token de sesión guardado
+Parsea HTML de las páginas de Aternos para extraer información
+Se enfoca en el servidor "LabForkRecargado" (ID: 84jkIui0VIWl9vQ6)
+2. Comandos de Discord Disponibles
+
+🔬 Servidor:
+
+$labfork - Conectar al servidor LabForkRecargado
+$status - Ver estado del servidor (online/offline/iniciando)
+$info - Información completa del servidor
+$console - Ver log de la consola
+
+👥 Jugadores:
+
+$stats <jugador> - Estadísticas del jugador (bloques destruidos, muertes, tiempo jugado)
+$player_data <jugador> - Datos esenciales (posición, vida, XP)
+🛠️ Utilidades:
+
+$help_aternos - Ver todos los comandos
+$test - Comando de prueba
+
+🔒 Modo Solo Lectura
+NO puede modificar el servidor
+NO puede ejecutar comandos que cambien el juego
+Solo consulta información existente
+Para modificaciones, hay que usar la consola web de Aternos
+📊 Información que Obtiene
+Estado del servidor: Online, offline, iniciando
+Estadísticas de jugadores: Bloques minados, muertes, horas jugadas
+Ubicación: Coordenadas X,Y,Z y dimensión (Overworld/Nether/End)
+Datos del jugador: Vida, nivel de XP, modo de juego
+🎮 Caso de Uso
+Los administradores y jugadores pueden usar Discord para revisar rápidamente el estado del servidor y estadísticas de jugadores sin necesidad de acceder directamente a Aternos o al juego.
