@@ -20,5 +20,71 @@
       "coordenadas": "223 1746",
       "dimension": "over"
     }
+  },
+  "339497734027345932": {
+    "Cerezal": {
+      "coordenadas": "-2131 103",
+      "dimension": "over"
+    },
+    "Coral": {
+      "coordenadas": "349 2347",
+      "dimension": "over"
+    },
+    "Spawn_chunk": {
+      "coordenadas": "507 33",
+      "dimension": "over"
+    },
+    "SpawnBlaze1": {
+      "coordenadas": "-407 139",
+      "dimension": "nether"
+    },
+    "SpawnBlaze2": {
+      "coordenadas": "-434 93",
+      "dimension": "nether"
+    },
+    "Portal_Principal": {
+      "coordenadas": "23 200",
+      "dimension": "nether"
+    },
+    "Portal_End": {
+      "coordenadas": "242 110",
+      "dimension": "nether"
+    },
+    "Portal_Spawn_Chunk": {
+      "coordenadas": "69 -2",
+      "dimension": "nether"
+    },
+    "Portal_Granja_Mobs": {
+      "coordenadas": "75 261",
+      "dimension": "nether"
+    },
+    "Portal_1": {
+      "coordenadas": "-4 1107",
+      "dimension": "end"
+    },
+    "Portal2": {
+      "coordenadas": "1053 2191",
+      "dimension": "end"
+    },
+    "Portal3": {
+      "coordenadas": "-256 3020",
+      "dimension": "end"
+    },
+    "Portal4": {
+      "coordenadas": "-951 4018",
+      "dimension": "end"
+    },
+    "Portal5": {
+      "coordenadas": "-896 4558",
+      "dimension": "end"
+    },
+    "Portal6": {
+      "coordenadas": "-183 5559",
+      "dimension": "end"
+    },
+    "Portal7": {
+      "coordenadas": "-870 6571",
+      "dimension": "end"
+    }
   }
 }

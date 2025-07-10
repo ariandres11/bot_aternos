@@ -67,31 +67,36 @@ async def cargar_coordenadas(ctx, nombre: str, x: int, z: int, dimension: str):
 @bot.command()
 async def coords(ctx):
     data = cargar_coordenadas_archivo()
-    user_id = str(ctx.author.id)
-    user_coords = data.get(user_id, {})
-    if not user_coords:
+    if not data:
         embed = discord.Embed(
-            title="❌ No tienes coordenadas guardadas.",
+            title="❌ No hay coordenadas registradas.",
             color=0xED4245
         )
         await ctx.send(embed=embed)
-    else:
-        embed = discord.Embed(
-            title="📒 Tus coordenadas",
-            color=0x5865F2
-        )
-        for nombre, info in user_coords.items():
+        return
+
+    embed = discord.Embed(
+        title="🌍 Coordenadas de todos los usuarios",
+        color=0x00b894
+    )
+    for user_id, coords in data.items():
+        try:
+            member = await ctx.guild.fetch_member(int(user_id))
+            username = member.display_name
+        except Exception:
+            username = f"ID: {user_id}"
+        for nombre, info in coords.items():
             emoji = "🌎"
             if "nether" in info["dimension"]:
                 emoji = "🔥"
             elif "end" in info["dimension"]:
                 emoji = "🟣"
             embed.add_field(
-                name=f"{emoji} {nombre}",
+                name=f"{emoji} {nombre} (por {username})",
                 value=f"📍 `{info['coordenadas']}`\n🌐 `{info['dimension']}`",
                 inline=False
             )
-        await ctx.send(embed=embed)
+    await ctx.send(embed=embed)
 
 @bot.command()
 async def borrar_coordenada(ctx, nombre: str):
@@ -228,6 +233,40 @@ async def buscar(ctx, *, texto: str):
                 inline=False
             )
         await ctx.send(embed=embed)
+
+@bot.command()
+async def todas_las_coordenadas(ctx):
+    data = cargar_coordenadas_archivo()
+    if not data:
+        embed = discord.Embed(
+            title="❌ No hay coordenadas registradas.",
+            color=0xED4245
+        )
+        await ctx.send(embed=embed)
+        return
+
+    embed = discord.Embed(
+        title="🌍 Coordenadas de todos los usuarios",
+        color=0x00b894
+    )
+    for user_id, coords in data.items():
+        try:
+            member = await ctx.guild.fetch_member(int(user_id))
+            username = member.display_name
+        except Exception:
+            username = f"ID: {user_id}"
+        for nombre, info in coords.items():
+            emoji = "🌎"
+            if "nether" in info["dimension"]:
+                emoji = "🔥"
+            elif "end" in info["dimension"]:
+                emoji = "🟣"
+            embed.add_field(
+                name=f"{emoji} {nombre} (por {username})",
+                value=f"📍 `{info['coordenadas']}`\n🌐 `{info['dimension']}`",
+                inline=False
+            )
+    await ctx.send(embed=embed)
 
 bot.remove_command('help')
 
