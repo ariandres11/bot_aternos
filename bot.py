@@ -14,7 +14,7 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix='$', intents=intents)
 
-COORDS_FILE = "coordenadas.json"
+COORDS_FILE = "./coordenadas.json"
 
 def cargar_coordenadas_archivo():
     if not os.path.exists(COORDS_FILE):
@@ -139,6 +139,97 @@ async def editar_coordenada(ctx, nombre: str, x: int, z: int, dimension: str):
             color=0xED4245
         )
         await ctx.send(embed=embed)
+
+@bot.command(name="help_ari")
+async def help_ari(ctx):
+    embed = discord.Embed(
+        title="📖 Comandos disponibles",
+        description="Lista de comandos del bot:",
+        color=0x3498db
+    )
+    embed.add_field(
+        name="🟢 $status",
+        value="Muestra el estado actual del servidor.",
+        inline=False
+    )
+    embed.add_field(
+        name="▶️ $start",
+        value="Inicia el servidor.",
+        inline=False
+    )
+    embed.add_field(
+        name="⏹️ $stop",
+        value="Detiene el servidor.",
+        inline=False
+    )
+    embed.add_field(
+        name="ℹ️ $info",
+        value="Muestra información del servidor.",
+        inline=False
+    )
+    embed.add_field(
+        name="📍 $cargar_coordenadas <nombre> <x> <z> <dimension>",
+        value="Guarda una coordenada con nombre, posición y dimensión.",
+        inline=False
+    )
+    embed.add_field(
+        name="📒 $coords",
+        value="Muestra todas tus coordenadas guardadas.",
+        inline=False
+    )
+    embed.add_field(
+        name="🗑️ $borrar_coordenada <nombre>",
+        value="Elimina una coordenada guardada por nombre.",
+        inline=False
+    )
+    embed.add_field(
+        name="✏️ $editar_coordenada <nombre> <x> <z> <dimension>",
+        value="Edita una coordenada existente.",
+        inline=False
+    )
+    embed.add_field(
+        name="🔍 $buscar <texto>",
+        value="Busca coordenadas por nombre (búsqueda parcial).",
+        inline=False
+    )
+    await ctx.send(embed=embed)
+
+@bot.command()
+async def buscar(ctx, *, texto: str):
+    data = cargar_coordenadas_archivo()
+    user_id = str(ctx.author.id)
+    user_coords = data.get(user_id, {})
+    resultados = []
+    texto = texto.lower()
+    for nombre, info in user_coords.items():
+        if texto in nombre.lower():
+            resultados.append((nombre, info))
+    if not resultados:
+        embed = discord.Embed(
+            title="🔍 Sin resultados",
+            description=f"No se encontraron coordenadas que contengan: `{texto}`",
+            color=0xED4245
+        )
+        await ctx.send(embed=embed)
+    else:
+        embed = discord.Embed(
+            title=f"🔍 Resultados para '{texto}'",
+            color=0x5865F2
+        )
+        for nombre, info in resultados:
+            emoji = "🌎"
+            if "nether" in info["dimension"]:
+                emoji = "🔥"
+            elif "end" in info["dimension"]:
+                emoji = "🟣"
+            embed.add_field(
+                name=f"{emoji} {nombre}",
+                value=f"📍 `{info['coordenadas']}`\n🌐 `{info['dimension']}`",
+                inline=False
+            )
+        await ctx.send(embed=embed)
+
+bot.remove_command('help')
 
 if __name__ == "__main__":
     bot.run(secretos.TOKEN)

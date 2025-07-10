@@ -3,6 +3,22 @@
     "BASE": {
       "coordenadas": "185 1630",
       "dimension": "over"
+    },
+    "TRIAL_CHAMBER_MEDINA": {
+      "coordenadas": "-1521 612",
+      "dimension": "over"
+    },
+    "BASTION_CERCA_PORTAL": {
+      "coordenadas": "123 281",
+      "dimension": "nether"
+    },
+    "SPAWN_ESQUELETOS": {
+      "coordenadas": "-23 1395",
+      "dimension": "over"
+    },
+    "SPAWN_ZOMBIES": {
+      "coordenadas": "223 1746",
+      "dimension": "over"
     }
   }
 }
